@@ -1,4 +1,4 @@
-import math, jsonify
+import math
 def estimator(data):
 		
 	#Convert or check that 'timeToElapse' is in days
