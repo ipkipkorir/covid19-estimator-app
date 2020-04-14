@@ -54,4 +54,4 @@ def estimator(data):
 		}
 
 	}
-	return jsonify({'estimate' : estimate})
+	return estimate
