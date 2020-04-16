@@ -14,20 +14,20 @@ def estimator(data):
 	impactCurrentlyInfected = data['reportedCases'] * 10
 	impactInfectionsByRequestedTime = impactCurrentlyInfected * (2 ** (timeInDays // 3))
 	impactSevereCasesByRequestedTime = (0.15 * impactInfectionsByRequestedTime) // 1
-	impactHospitalBedsByRequestedTime = math.trunc(((0.35 * data['totalHospitalBeds']) * timeInDays) - impactSevereCasesByRequestedTime)
-	impactCasesForICUByRequestedTime = math.trunc(0.05 * impactInfectionsByRequestedTime)
-	impactCasesForVentilatorsByRequestedTime = math.trunc(0.02 * impactInfectionsByRequestedTime)
-	impactDollarsInFlight = math.trunc(((impactInfectionsByRequestedTime * data["region"]['avgDailyIncomePopulation']) * data["region"]['avgDailyIncomeInUSD']) // timeInDays)
+	impactHospitalBedsByRequestedTime = (((0.35 * data['totalHospitalBeds']) * timeInDays) - impactSevereCasesByRequestedTime) // 1
+	impactCasesForICUByRequestedTime = (0.05 * impactInfectionsByRequestedTime) // 1
+	impactCasesForVentilatorsByRequestedTime = (0.02 * impactInfectionsByRequestedTime) // 1
+	impactDollarsInFlight = (((impactInfectionsByRequestedTime * data["region"]['avgDailyIncomePopulation']) * data["region"]['avgDailyIncomeInUSD']) // timeInDays) // 1
 
 	#Compute estimates:
 	##Severe Impact computation
 	severeImpactCurrentlyInfected = data['reportedCases'] * 50
 	severeImpactInfectionsByRequestedTime = severeImpactCurrentlyInfected * (2 ** (timeInDays // 3))
-	severeImpactSevereCasesByRequestedTime =  math.trunc(0.15 * severeImpactInfectionsByRequestedTime)
-	severeImpactHospitalBedsByRequestedTime = math.trunc(((0.35 * data['totalHospitalBeds']) * timeInDays)- severeImpactSevereCasesByRequestedTime)
-	severeImpactCasesForICUByRequestedTime = math.trunc(0.05 * severeImpactInfectionsByRequestedTime)
-	severeImpactCasesForVentilatorsByRequestedTime = math.trunc(0.02 * severeImpactInfectionsByRequestedTime)
-	severeImpactDollarsInFlight = math.trunc(((severeImpactInfectionsByRequestedTime * data["region"]['avgDailyIncomePopulation']) * data["region"]['avgDailyIncomeInUSD']) // timeInDays)
+	severeImpactSevereCasesByRequestedTime =  (0.15 * severeImpactInfectionsByRequestedTime) // 1
+	severeImpactHospitalBedsByRequestedTime = (((0.35 * data['totalHospitalBeds']) * timeInDays)- severeImpactSevereCasesByRequestedTime) // 1
+	severeImpactCasesForICUByRequestedTime = (0.05 * severeImpactInfectionsByRequestedTime) // 1
+	severeImpactCasesForVentilatorsByRequestedTime = (0.02 * severeImpactInfectionsByRequestedTime) // 1
+	severeImpactDollarsInFlight = (((severeImpactInfectionsByRequestedTime * data["region"]['avgDailyIncomePopulation']) * data["region"]['avgDailyIncomeInUSD']) // timeInDays) // 1
 
 	#Estimates
 	estimate = {
