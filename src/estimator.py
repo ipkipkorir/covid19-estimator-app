@@ -13,7 +13,7 @@ def estimator(data):
 	##Impact computation
 	impactCurrentlyInfected = data['reportedCases'] * 10
 	impactInfectionsByRequestedTime = impactCurrentlyInfected * (2 ** (timeInDays // 3))
-	impactSevereCasesByRequestedTime = math.trunc(0.15 * impactInfectionsByRequestedTime)
+	impactSevereCasesByRequestedTime = (0.15 * impactInfectionsByRequestedTime) // 1
 	impactHospitalBedsByRequestedTime = math.trunc(((0.35 * data['totalHospitalBeds']) * timeInDays) - impactSevereCasesByRequestedTime)
 	impactCasesForICUByRequestedTime = math.trunc(0.05 * impactInfectionsByRequestedTime)
 	impactCasesForVentilatorsByRequestedTime = math.trunc(0.02 * impactInfectionsByRequestedTime)
